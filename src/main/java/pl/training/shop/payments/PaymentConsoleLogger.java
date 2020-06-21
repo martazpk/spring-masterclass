@@ -1,22 +1,19 @@
 package pl.training.shop.payments;
 
-import lombok.RequiredArgsConstructor;
 import lombok.extern.java.Log;
+import org.aspectj.lang.annotation.AfterReturning;
+import org.aspectj.lang.annotation.Aspect;
 import org.springframework.stereotype.Component;
 
+@Aspect
 @Component
 @Log
-@RequiredArgsConstructor
-public class LoggingPaymentService implements PaymentService{
-    private final FakePaymentService fakePaymentService;
-
+public class PaymentConsoleLogger {
     private static final String LOG_FORMAT = "A new Payment of %s has been initialized";
 
-    @Override
-    public Payment process(PaymentRequest request) {
-        var payment = fakePaymentService.process(request);
+    @AfterReturning(value = "@annotation(LogPayments)", returning = "payment")
+    public void log(Payment payment){
         log.info(createLogEntry(payment));
-        return payment;
     }
 
     private String createLogEntry(Payment payment){

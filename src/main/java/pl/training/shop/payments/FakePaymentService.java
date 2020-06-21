@@ -12,8 +12,9 @@ import java.time.Instant;
 public class FakePaymentService implements PaymentService {
     private final PaymentIdGenerator generator;
 
+    @LogPayments
     @Override
-    public Payment process(PaymentRequest request){
+    public Payment process(PaymentRequest request) {
         return Payment.builder()
                 .id(generator.getNext())
                 .money(request.getMoney())
