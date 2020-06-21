@@ -7,7 +7,8 @@ import pl.training.shop.payments.*;
 public class Application {
     public static void main(String[] args) {
         var paymentGenerator = new IncrementalPaymentIdGenerator();
-        var paymentService = new FakePaymentService(paymentGenerator);
+        var fakePaymentService = new FakePaymentService(paymentGenerator);
+        var paymentService = new LoggingPaymentService(fakePaymentService);
         var paymentRequest = PaymentRequest.builder()
                 .money(LocalMoney.of(1_000))
                 .build();
