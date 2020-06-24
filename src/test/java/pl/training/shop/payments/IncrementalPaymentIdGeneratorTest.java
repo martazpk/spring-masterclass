@@ -7,6 +7,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.*;
 
 class IncrementalPaymentIdGeneratorTest {
+
     private static final String ID_FORMAT = "\\d{10}";
     private final IncrementalPaymentIdGenerator generator = new IncrementalPaymentIdGenerator();
 
