@@ -1,17 +1,21 @@
 package pl.training.shop.payments;
 
-import lombok.RequiredArgsConstructor;
 import lombok.extern.java.Log;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
 import java.time.Instant;
 
 @Service
 @Log
-@RequiredArgsConstructor
 public class FakePaymentService implements PaymentService {
     private final PaymentIdGenerator generator;
     private final PaymentRepository repository;
+
+    public FakePaymentService(@Qualifier("incrementalPaymentIdGenerator") PaymentIdGenerator generator, PaymentRepository repository) {
+        this.generator = generator;
+        this.repository = repository;
+    }
 
     @LogPayments
     @Override
