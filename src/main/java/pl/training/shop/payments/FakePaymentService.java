@@ -1,6 +1,7 @@
 package pl.training.shop.payments;
 
 import lombok.extern.java.Log;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
 import java.time.Instant;
@@ -11,7 +12,7 @@ public class FakePaymentService implements PaymentService {
     private final PaymentIdGenerator paymentIdGenerator;
     private final PaymentRepository repository;
 
-    public FakePaymentService(PaymentIdGenerator paymentIdGenerator, PaymentRepository repository) {
+    public FakePaymentService(@Qualifier("uuid") PaymentIdGenerator paymentIdGenerator, PaymentRepository repository) {
         this.paymentIdGenerator = paymentIdGenerator;
         this.repository = repository;
     }
