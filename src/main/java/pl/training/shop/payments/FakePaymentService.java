@@ -12,7 +12,7 @@ public class FakePaymentService implements PaymentService {
     private final PaymentIdGenerator paymentIdGenerator;
     private final PaymentRepository repository;
 
-    public FakePaymentService(@Qualifier("uuid") PaymentIdGenerator paymentIdGenerator, PaymentRepository repository) {
+    public FakePaymentService(@IdGenerator("uuid") PaymentIdGenerator paymentIdGenerator, PaymentRepository repository) {
         this.paymentIdGenerator = paymentIdGenerator;
         this.repository = repository;
     }
