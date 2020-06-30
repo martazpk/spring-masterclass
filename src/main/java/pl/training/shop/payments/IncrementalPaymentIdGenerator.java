@@ -1,9 +1,9 @@
 package pl.training.shop.payments;
 
 import lombok.Setter;
-import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 
-@Component
+@Service
 public class IncrementalPaymentIdGenerator implements PaymentIdGenerator{
     private static final String ID_FORMAT = "%010d";
     @Setter
