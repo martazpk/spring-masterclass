@@ -1,18 +1,15 @@
 package pl.training.shop.payments;
 
+import lombok.RequiredArgsConstructor;
 import lombok.extern.java.Log;
 
 import java.time.Instant;
 
 @Log
+@RequiredArgsConstructor
 public class FakePaymentService implements PaymentService {
     private final PaymentIdGenerator paymentIdGenerator;
     private final PaymentRepository repository;
-
-    public FakePaymentService(@IdGenerator("uuid") PaymentIdGenerator paymentIdGenerator, PaymentRepository repository) {
-        this.paymentIdGenerator = paymentIdGenerator;
-        this.repository = repository;
-    }
 
     @LogPayments
     @Override
