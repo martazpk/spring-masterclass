@@ -1,13 +1,9 @@
 package pl.training.shop.payments;
 
 import lombok.extern.java.Log;
-import org.springframework.stereotype.Service;
 
-import javax.annotation.PostConstruct;
-import javax.annotation.PreDestroy;
 import java.time.Instant;
 
-@Service
 @Log
 public class FakePaymentService implements PaymentService {
     private final PaymentIdGenerator paymentIdGenerator;
@@ -31,12 +27,10 @@ public class FakePaymentService implements PaymentService {
         return payment;
     }
 
-    @PostConstruct
     public void init(){
         log.info("Payment service initialized. ");
     }
 
-    @PreDestroy
     public void destroy(){
         log.info("Payment service is going down.");
     }
