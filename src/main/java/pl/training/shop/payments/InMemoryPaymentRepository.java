@@ -6,6 +6,7 @@ import org.springframework.stereotype.Repository;
 import java.util.HashMap;
 import java.util.Map;
 
+@Repository
 public class InMemoryPaymentRepository implements PaymentRepository {
     @Setter
     Map<String, Payment> payments = new HashMap<>();
