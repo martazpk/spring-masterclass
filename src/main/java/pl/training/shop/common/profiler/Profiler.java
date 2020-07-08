@@ -4,7 +4,9 @@ import lombok.extern.java.Log;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
+import org.springframework.core.annotation.Order;
 
+@Order(10)
 @Log
 @Aspect
 public class Profiler {
