@@ -11,7 +11,8 @@ import org.springframework.core.annotation.Order;
 @Aspect
 public class Profiler {
 
-    @Around("@annotation(ExecutionTime)")
+    @Around("bean(fakePaymentService)")
+//    @Around("@annotation(ExecutionTime)")
     public Object logExecutionTime(ProceedingJoinPoint proceedingJoinPoint) throws Throwable {
         long startTime = System.nanoTime();
         Object result = proceedingJoinPoint.proceed();
