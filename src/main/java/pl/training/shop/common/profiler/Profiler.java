@@ -1,0 +1,19 @@
+package pl.training.shop.common.profiler;
+
+import lombok.extern.java.Log;
+import org.aspectj.lang.ProceedingJoinPoint;
+import org.aspectj.lang.annotation.Around;
+import org.aspectj.lang.annotation.Aspect;
+
+@Log
+@Aspect
+public class Profiler {
+
+    @Around("@annotation(ExecutionTime)")
+    public Object logExecutionTime(ProceedingJoinPoint proceedingJoinPoint) throws Throwable {
+        long startTime = System.nanoTime();
+        Object result = proceedingJoinPoint.proceed();
+        long totalTime = System.nanoTime() - startTime;
+        return result;
+    }
+}
