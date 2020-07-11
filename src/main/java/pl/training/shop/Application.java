@@ -7,6 +7,7 @@ import pl.training.shop.payments.*;
 import pl.training.shop.products.Product;
 import pl.training.shop.products.ProductType;
 
+import java.util.Collections;
 import java.util.List;
 
 @Log
@@ -35,7 +36,7 @@ public class Application {
 
             log.info(shopService.getProducts(0, 10).toString());
 
-            Order order = new Order(List.of(VIDEO_PRODUCT, BOOK_PRODUCT));
+            Order order = new Order(Collections.emptyList());
 
             shopService.placeOrder(order);
             var payment = shopService.payForOrder(order.getId());
