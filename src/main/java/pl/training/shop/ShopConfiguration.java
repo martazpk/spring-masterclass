@@ -1,6 +1,8 @@
 package pl.training.shop;
 
 import com.zaxxer.hikari.HikariDataSource;
+import org.hibernate.SessionFactory;
+import org.springframework.beans.factory.config.PropertiesFactoryBean;
 import org.springframework.context.MessageSource;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -8,12 +10,19 @@ import org.springframework.context.annotation.EnableAspectJAutoProxy;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.context.support.ResourceBundleMessageSource;
 import org.springframework.core.env.Environment;
+import org.springframework.core.io.ClassPathResource;
+import org.springframework.orm.hibernate5.HibernateTransactionManager;
+import org.springframework.orm.hibernate5.LocalSessionFactoryBean;
+import org.springframework.transaction.PlatformTransactionManager;
+import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 import javax.sql.DataSource;
+import java.util.Properties;
 
 @PropertySource("classpath:jdbc.properties")
 @EnableAspectJAutoProxy
 @Configuration
+@EnableTransactionManagement
 public class ShopConfiguration {
 
     @Bean
@@ -25,7 +34,7 @@ public class ShopConfiguration {
     }
 
     @Bean
-    DataSource dataSource(Environment environment) {
+    public DataSource dataSource(Environment environment) {
         HikariDataSource dataSource = new HikariDataSource();
         dataSource.setUsername(environment.getProperty("database.username"));
         dataSource.setPassword(environment.getProperty("database.password"));
@@ -33,4 +42,26 @@ public class ShopConfiguration {
         dataSource.setDriverClassName(environment.getProperty("database.driver"));
         return dataSource;
     }
+
+    @Bean
+    public PropertiesFactoryBean hibernateProperties() {
+        PropertiesFactoryBean factoryBean = new PropertiesFactoryBean();
+        factoryBean.setLocation(new ClassPathResource("hibernate.properties"));
+        return factoryBean;
+    }
+
+    @Bean
+    public LocalSessionFactoryBean sessionFactory(DataSource dataSource, Properties hibernateProperties) {
+        LocalSessionFactoryBean factoryBean = new LocalSessionFactoryBean();
+        factoryBean.setDataSource(dataSource);
+        factoryBean.setHibernateProperties(hibernateProperties);
+        factoryBean.setPackagesToScan("org.training.shop"); //looking for @Entity
+        return factoryBean;
+    }
+
+    @Bean
+    public PlatformTransactionManager transactionManager(SessionFactory sessionFactory){
+        return new HibernateTransactionManager(sessionFactory);
+    }
+
 }
