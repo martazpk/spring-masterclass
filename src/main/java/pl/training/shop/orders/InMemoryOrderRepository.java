@@ -6,7 +6,6 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Optional;
 
-@Repository
 public class InMemoryOrderRepository implements OrderRepository {
     private Map<Long, Order> orders = new HashMap<>();
     private long index = 0;
