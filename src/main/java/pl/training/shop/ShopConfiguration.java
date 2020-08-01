@@ -55,13 +55,12 @@ public class ShopConfiguration {
         LocalSessionFactoryBean factoryBean = new LocalSessionFactoryBean();
         factoryBean.setDataSource(dataSource);
         factoryBean.setHibernateProperties(hibernateProperties);
-        factoryBean.setPackagesToScan("org.training.shop"); //looking for @Entity
+        factoryBean.setPackagesToScan("pl.training.shop");
         return factoryBean;
     }
 
     @Bean
-    public PlatformTransactionManager transactionManager(SessionFactory sessionFactory){
+    public PlatformTransactionManager transactionManager(SessionFactory sessionFactory) {
         return new HibernateTransactionManager(sessionFactory);
     }
-
 }
