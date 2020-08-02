@@ -8,7 +8,6 @@ import pl.training.shop.common.PagedResult;
 
 import java.util.List;
 
-@Repository
 @RequiredArgsConstructor
 public class HibernateProductRepository implements ProductRepository {
     private final SessionFactory sessionFactory;
