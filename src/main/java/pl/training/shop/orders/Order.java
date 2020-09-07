@@ -25,7 +25,7 @@ public class Order {
     @NotEmpty
     @NonNull
     private List<Product> products;
-    @OneToOne
+    @OneToOne(cascade = CascadeType.ALL)
     private Payment payment;
     private Instant timestamp;
 

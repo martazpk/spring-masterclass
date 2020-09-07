@@ -19,6 +19,6 @@ public class OrderService {
     }
 
     public void update(Order order) {
-        repository.update(order);
+        repository.save(order);
     }
 }
