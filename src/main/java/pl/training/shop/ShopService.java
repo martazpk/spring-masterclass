@@ -12,6 +12,7 @@ import pl.training.shop.products.Product;
 import pl.training.shop.products.ProductService;
 
 import javax.transaction.Transactional;
+import java.util.List;
 
 @Service
 @Transactional
@@ -23,6 +24,10 @@ public class ShopService {
 
     public Product addProduct(Product product){
         return productService.add(product);
+    }
+
+    public List<Product> getProductByName(String name){
+        return productService.findByName(name);
     }
 
     public PagedResult<Product> getProducts(int pageNumber, int pageSize){

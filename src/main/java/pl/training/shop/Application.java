@@ -41,6 +41,9 @@ public class Application {
             var payment = shopService.payForOrder(order.getId());
 
             log.info(payment.getId());
+
+            log.info(shopService.getProductByName("Spring").toString());
+            log.info(shopService.getProductByName("Spring").toString());
         }
     }
 }
