@@ -6,16 +6,19 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 import pl.training.shop.common.PagedResult;
 
+import javax.transaction.Transactional;
 import java.util.List;
 import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
+@Transactional
 public class UserService {
     private final UserRepository userRepository;
 
-    public Optional<User> getById(Long id){
-        return userRepository.findById(id);
+    public User getById(Long id){
+        return userRepository.findById(id)
+                .orElseThrow(UserNotFoundException::new);
     }
 
     public List<User> getByName(String name){

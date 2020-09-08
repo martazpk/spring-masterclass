@@ -6,11 +6,13 @@ import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.stereotype.Service;
 import pl.training.shop.common.profiler.ExecutionTime;
 
+import javax.transaction.Transactional;
 import java.time.Instant;
 
 @Log
 @RequiredArgsConstructor
 @Service
+@Transactional
 public class FakePaymentService implements PaymentService {
 
     private final PaymentIdGenerator paymentIdGenerator;

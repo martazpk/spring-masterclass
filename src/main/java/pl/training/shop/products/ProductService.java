@@ -10,11 +10,13 @@ import org.springframework.stereotype.Service;
 import pl.training.shop.common.PagedResult;
 import pl.training.shop.common.retry.Retry;
 
+import javax.transaction.Transactional;
 import java.util.List;
 
 @Service
 @Log
 @RequiredArgsConstructor
+@Transactional
 public class ProductService {
 
     private final ProductRepository productRepository;
