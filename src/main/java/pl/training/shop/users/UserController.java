@@ -3,7 +3,9 @@ package pl.training.shop.users;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import pl.training.shop.common.UriBuilder;
+import pl.training.shop.common.PagedResult;
+import pl.training.shop.common.web.PagedResultTransferObject;
+import pl.training.shop.common.web.UriBuilder;
 
 import java.net.URI;
 
@@ -14,18 +16,30 @@ public class UserController {
 
     private final UserService userService;
     private final UriBuilder uriBuilder = new UriBuilder();
+    private final UserMapper userMapper;
 
     @PostMapping
-    public ResponseEntity<User> addUser(@RequestBody User user){
+    public ResponseEntity<User> addUser(@RequestBody UserTransferObject userTransferObject) {
+        User user = userMapper.toUser(userTransferObject);
         Long userId = userService.add(user).getId();
         URI locationUri = uriBuilder.requestUriWithId(userId);
         return ResponseEntity.created(locationUri).build();
     }
 
     @GetMapping("{id}")
-    public ResponseEntity<User> getUser(@PathVariable Long id){
+    public ResponseEntity<UserTransferObject> getUser(@PathVariable Long id) {
         User user = userService.getById(id);
-        return ResponseEntity.ok(user);
+        UserTransferObject transferObject = userMapper.toTransferObject(user);
+        return ResponseEntity.ok(transferObject);
+    }
 
+    @GetMapping
+    PagedResultTransferObject<UserTransferObject> getUsersBySurname(
+            @RequestParam String surnameFragment,
+            @RequestParam(defaultValue = "0") int pageNumber,
+            @RequestParam(defaultValue = "5") int pageSize
+    ) {
+        PagedResult<User> usersPage = userService.getBySurname(surnameFragment, pageNumber, pageSize);
+        return userMapper.toUserTransferObjectsPage(usersPage);
     }
 }

@@ -15,6 +15,7 @@
     <junit.version>5.5.2</junit.version>
     <mockito.version>3.3.3</mockito.version>
     <spring.version>5.2.7.RELEASE</spring.version>
+    <mapstruct.version>1.3.1.Final</mapstruct.version>
     <failOnMissingWebXml>false</failOnMissingWebXml>
 </properties>
     <build>
@@ -56,6 +57,16 @@
             <groupId>com.fasterxml.jackson.core</groupId>
             <artifactId>jackson-databind</artifactId>
             <version>2.11.0</version>
+        </dependency>
+        <dependency>
+            <groupId>org.mapstruct</groupId>
+            <artifactId>mapstruct-processor</artifactId>
+            <version>${mapstruct.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.mapstruct</groupId>
+            <artifactId>mapstruct</artifactId>
+            <version>${mapstruct.version}</version>
         </dependency>
         <dependency>
             <groupId>org.aspectj</groupId>

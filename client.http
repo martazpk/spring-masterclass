@@ -3,12 +3,16 @@ Content-Type: application/json
 
 {
   "name": "Peter",
-  "surname": "Parker"
+  "surname": "Parker",
+  "emailAddress": "peter@test.pl"
 }
 
 ###
-GET http://localhost:8080/api/users/1
+GET http://localhost:8080/api/users/2
 Content-Type: application/json
 
+###
+GET http://localhost:8080/api/users/?surnameFragment=Par
+Content-Type: application/json
 
 
