@@ -2,11 +2,13 @@ package pl.training.shop.users;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import pl.training.shop.common.PagedResult;
 import pl.training.shop.common.web.PagedResultTransferObject;
 import pl.training.shop.common.web.UriBuilder;
 
+import javax.validation.Valid;
 import java.net.URI;
 
 @RestController
@@ -19,7 +21,10 @@ public class UserController {
     private final UserMapper userMapper;
 
     @PostMapping
-    public ResponseEntity<User> addUser(@RequestBody UserTransferObject userTransferObject) {
+    public ResponseEntity<User> addUser(@Valid @RequestBody UserTransferObject userTransferObject, BindingResult bindingResult) {
+        if(bindingResult.hasErrors()) {
+            return ResponseEntity.badRequest().build();
+        }
         User user = userMapper.toUser(userTransferObject);
         Long userId = userService.add(user).getId();
         URI locationUri = uriBuilder.requestUriWithId(userId);
@@ -42,4 +47,11 @@ public class UserController {
         PagedResult<User> usersPage = userService.getBySurname(surnameFragment, pageNumber, pageSize);
         return userMapper.toUserTransferObjectsPage(usersPage);
     }
+
+//    @ExceptionHandler(UserNotFoundException.class)
+//    public ResponseEntity<ExceptionTransferObject> onUserNotFound(UserNotFoundException exception) {
+//        return ResponseEntity
+//                .status(HttpStatus.NOT_FOUND)
+//                .body(new ExceptionTransferObject("User not found"));
+//    }
 }
