@@ -8,7 +8,6 @@ import pl.training.shop.common.PagedResult;
 
 import javax.transaction.Transactional;
 import java.util.List;
-import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
@@ -16,16 +15,16 @@ import java.util.Optional;
 public class UserService {
     private final UserRepository userRepository;
 
-    public User getById(Long id){
+    public User add(User user) {
+        return userRepository.save(user);
+    }
+
+    public User getById(Long id) {
         return userRepository.findById(id)
                 .orElseThrow(UserNotFoundException::new);
     }
 
-    public List<User> getByName(String name){
-        return userRepository.findByName(name);
-    }
-
-    public PagedResult<User> getAll(int pageNumber, int pageSize){
+    public PagedResult<User> getAll(int pageNumber, int pageSize) {
         Page<User> all = userRepository.findAll(PageRequest.of(pageNumber, pageSize));
         return new PagedResult<>(all.getContent(), pageNumber, all.getTotalPages());
     }
