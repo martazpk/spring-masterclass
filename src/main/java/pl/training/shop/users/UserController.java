@@ -11,6 +11,9 @@ import pl.training.shop.common.web.UriBuilder;
 import javax.validation.Valid;
 import java.net.URI;
 
+import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.linkTo;
+import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.methodOn;
+
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("api/users")
@@ -35,6 +38,7 @@ public class UserController {
     public ResponseEntity<UserTransferObject> getUser(@PathVariable Long id) {
         User user = userService.getById(id);
         UserTransferObject transferObject = userMapper.toTransferObject(user);
+        transferObject.add(linkTo(methodOn(UserController.class).getUser(id)).withSelfRel());
         return ResponseEntity.ok(transferObject);
     }
 
