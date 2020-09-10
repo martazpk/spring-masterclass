@@ -11,7 +11,6 @@ import pl.training.shop.common.PagedResult;
 import pl.training.shop.common.retry.Retry;
 
 import javax.transaction.Transactional;
-import java.util.List;
 
 @Service
 @Log
@@ -28,9 +27,15 @@ public class ProductService {
     }
 
     @Cacheable("products")
-    public List<Product> findByName(String name) {
+    public PagedResult<Product> findByName(String name, int pageNumber, int pageSize) {
         log.info("reading from database...");
-        return productRepository.findByNameContaining(name);
+        Page<Product> byNameContaining = productRepository.findByNameContaining(name, PageRequest.of(pageNumber, pageSize));
+        return new PagedResult<>(byNameContaining.getContent(), pageNumber, byNameContaining.getTotalPages());
+    }
+
+    public Product findById(Long id) {
+        return productRepository.findById(id)
+                .orElseThrow(ProductNotFoundException::new);
     }
 
     public PagedResult<Product> getAll(int pageNumber, int pageSize) {

@@ -2,9 +2,7 @@ package pl.training.shop.products;
 
 import lombok.*;
 import org.hibernate.annotations.Columns;
-import org.hibernate.annotations.TypeDef;
 import org.javamoney.moneta.FastMoney;
-import pl.training.shop.common.FastMoneyUserType;
 
 import javax.persistence.*;
 

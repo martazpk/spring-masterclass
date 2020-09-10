@@ -9,7 +9,6 @@ import org.hibernate.usertype.CompositeUserType;
 import org.javamoney.moneta.FastMoney;
 
 import java.io.Serializable;
-import java.math.BigDecimal;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
