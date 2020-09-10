@@ -3,6 +3,7 @@ package pl.training.shop.products;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 import pl.training.shop.common.PagedResult;
 import pl.training.shop.common.web.PagedResultTransferObject;
 import pl.training.shop.common.web.UriBuilder;
@@ -19,7 +20,7 @@ public class ProductController {
     private UriBuilder uriBuilder = new UriBuilder();
 
     @PostMapping
-    public ResponseEntity<ProductTransferObject> add(@RequestBody @Valid ProductTransferObject transferObject){
+    public ResponseEntity<ProductTransferObject> add(@RequestBody @Valid ProductTransferObject transferObject) {
         Product product = productMapper.toProduct(transferObject);
         Long id = productService.add(product).getId();
         URI uriLocation = uriBuilder.requestUriWithId(id);
@@ -27,23 +28,17 @@ public class ProductController {
     }
 
     @GetMapping({"{id}"})
-    public ResponseEntity<ProductTransferObject> getById(@PathVariable Long id){
+    public ResponseEntity<ProductTransferObject> getById(@PathVariable Long id) {
         Product byId = productService.findById(id);
         ProductTransferObject productTransferObject = productMapper.toProductTransferObject(byId);
         return ResponseEntity.ok(productTransferObject);
     }
 
-//    @GetMapping({"{id}"})
-//    public ResponseEntity<Product> getById(@PathVariable Long id){
-//        Product byId = productService.findById(id);
-//        return ResponseEntity.ok(byId);
-//    }
-
     @GetMapping
     PagedResultTransferObject<ProductTransferObject> getByName(
             @RequestParam String name,
             @RequestParam(defaultValue = "0") int pageNumber,
-            @RequestParam(defaultValue = "5") int pageSize){
+            @RequestParam(defaultValue = "5") int pageSize) {
         PagedResult<Product> byNamePage = productService.findByName(name, pageNumber, pageSize);
         return productMapper.toProductTransferObjectsPage(byNamePage);
     }
@@ -51,7 +46,13 @@ public class ProductController {
     @GetMapping("all")
     PagedResultTransferObject<ProductTransferObject> getAll(
             @RequestParam(defaultValue = "0") int pageNumber,
-            @RequestParam(defaultValue = "5") int pageSize){
+            @RequestParam(defaultValue = "5") int pageSize) {
         PagedResult<Product> byNamePage = productService.getAll(pageNumber, pageSize);
-        return productMapper.toProductTransferObjectsPage(byNamePage);}
+        return productMapper.toProductTransferObjectsPage(byNamePage);
+    }
+
+    @PostMapping("{id}/files")
+    String submit(@PathVariable Long id, @RequestParam MultipartFile file){
+        return "File " + file.getOriginalFilename() + " uploaded.";
+    }
 }
