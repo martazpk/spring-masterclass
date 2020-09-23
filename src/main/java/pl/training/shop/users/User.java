@@ -4,6 +4,7 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 
 import javax.persistence.*;
+import javax.validation.constraints.Pattern;
 
 @Entity
 @Data
@@ -13,6 +14,7 @@ public class User {
     @Id
     @GeneratedValue
     private Long id;
+    @Pattern(regexp = "[A-Za-z]")
     @Column(name = "name", nullable = false)
     private String name;
     @Column(name = "surname", nullable = false)
