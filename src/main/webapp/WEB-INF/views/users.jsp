@@ -33,6 +33,13 @@
         </c:forEach>
         </tbody>
     </table>
+        <c:if test="${users.pageNumber > 0}">
+            <a href="show-users.html?pageNumber=${users.pageNumber -1}">Back</a>
+        </c:if>
+        <c:if test="${users.pageNumber + 1 < users.totalPages}">
+            <a href="show-users.html?pageNumber=${users.pageNumber +1}" class="float-right">Next</a>
+        </c:if>
+        <div class="text-center">${users.pageNumber + 1} / ${users.totalPages}</div>
     </c:if>
 </div>
 </body>
