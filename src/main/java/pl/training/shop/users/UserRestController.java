@@ -17,7 +17,7 @@ import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.methodOn;
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("api/users")
-public class UserController {
+public class UserRestController {
 
     private final UserService userService;
     private final UriBuilder uriBuilder = new UriBuilder();
@@ -38,7 +38,7 @@ public class UserController {
     public ResponseEntity<UserTransferObject> getUser(@PathVariable Long id) {
         User user = userService.getById(id);
         UserTransferObject transferObject = userMapper.toTransferObject(user);
-        transferObject.add(linkTo(methodOn(UserController.class).getUser(id)).withSelfRel());
+        transferObject.add(linkTo(methodOn(UserRestController.class).getUser(id)).withSelfRel());
         return ResponseEntity.ok(transferObject);
     }
 
