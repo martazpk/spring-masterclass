@@ -14,6 +14,7 @@
 <body>
 <%@ include file="menu.jsp" %>
 <div class="container">
+    <c:if test="${users.totalPages > 0}">
     <table class="table">
         <thead>
         <tr>
@@ -32,6 +33,7 @@
         </c:forEach>
         </tbody>
     </table>
+    </c:if>
 </div>
 </body>
 </html>
