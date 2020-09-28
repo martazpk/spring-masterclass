@@ -32,4 +32,5 @@ public class UserService {
         Page<User> all = userRepository.findBySurnameContaining(surnameFragment, PageRequest.of(pageNumber, pageSize));
         return new PagedResult<>(all.getContent(), pageNumber, all.getTotalPages());
     }
+
 }
