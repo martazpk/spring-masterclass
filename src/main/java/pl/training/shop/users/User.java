@@ -5,7 +5,6 @@ import lombok.EqualsAndHashCode;
 import pl.training.shop.common.validator.Name;
 
 import javax.persistence.*;
-import javax.validation.constraints.Pattern;
 
 @Entity
 @Data
@@ -15,7 +14,6 @@ public class User {
     @Id
     @GeneratedValue
     private Long id;
-    @Pattern(regexp = "[A-Za-z]")
     @Column(name = "name", nullable = false)
     private String name;
     @Name
