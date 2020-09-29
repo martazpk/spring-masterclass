@@ -7,6 +7,10 @@ const routes: Routes = [
   {
     path: 'users',
     component: UsersListComponent
+  },
+  {
+    path: 'add-user',
+    component: UserFormComponent
   }
 ];
 

@@ -8,6 +8,7 @@ import {Api} from "./api";
 import { UsersListComponent } from './component/users-list/users-list.component';
 import {UserService} from "./service/user.service";
 import { UserFormComponent } from './component/user-form/user-form.component';
+import {FormsModule} from "@angular/forms";
 
 @NgModule({
   declarations: [
@@ -18,7 +19,8 @@ import { UserFormComponent } from './component/user-form/user-form.component';
   imports: [
     BrowserModule,
     AppRoutingModule,
-    HttpClientModule
+    HttpClientModule,
+    FormsModule
   ],
   providers: [
     Api,

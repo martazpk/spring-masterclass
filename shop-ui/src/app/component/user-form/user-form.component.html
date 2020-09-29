@@ -1,0 +1,16 @@
+<div class="user-form">
+  <h1 class="text-center">Add user</h1>
+  <div class="form-group">
+    <label for="name">First name</label>
+    <input id="name" class="form-control" [(ngModel)]="user.name"/>
+  </div>
+  <div class="form-group">
+    <label for="surname">Surname</label>
+    <input id="surname" class="form-control" [(ngModel)]="user.surname"/>
+  </div>
+  <div class="form-group">
+    <label for="email">Email Address</label>
+    <input id="email" class="form-control" [(ngModel)]="user.emailAddress"/>
+  </div>
+  <button type="button" class="btn btn-primary" (click)="save()">Save</button>
+</div>
