@@ -9,12 +9,17 @@ import { UsersListComponent } from './component/users-list/users-list.component'
 import {UserService} from "./service/user.service";
 import { UserFormComponent } from './component/user-form/user-form.component';
 import {FormsModule} from "@angular/forms";
+import { ProductListComponent } from './component/product-list/product-list.component';
+import {ProductService} from "./service/product.service";
+import { ProductFormComponent } from './component/product-form/product-form.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     UsersListComponent,
-    UserFormComponent
+    UserFormComponent,
+    ProductListComponent,
+    ProductFormComponent
   ],
   imports: [
     BrowserModule,
@@ -24,7 +29,8 @@ import {FormsModule} from "@angular/forms";
   ],
   providers: [
     Api,
-    UserService
+    UserService,
+    ProductService
   ],
   bootstrap: [AppComponent]
 })
