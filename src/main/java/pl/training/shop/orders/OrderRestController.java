@@ -10,8 +10,8 @@ import java.net.URI;
 
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("api/orders")
-public class OrderController {
+@RequestMapping("${apiPrefix}/orders")
+public class OrderRestController {
     private final OrderService orderService;
     private final OrderMapper orderMapper;
     private UriBuilder uriBuilder = new UriBuilder();

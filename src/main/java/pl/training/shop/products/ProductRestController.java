@@ -12,7 +12,7 @@ import javax.validation.Valid;
 import java.net.URI;
 
 @RestController
-@RequestMapping("api/products")
+@RequestMapping("${apiPrefix}/products")
 @RequiredArgsConstructor
 public class ProductRestController {
     private final ProductService productService;

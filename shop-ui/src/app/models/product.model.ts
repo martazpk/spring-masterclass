@@ -6,5 +6,4 @@ export class ProductModel {
   description: string;
   price: string;
   type: ProductTypeModel;
-  keys = Object.keys;
 }

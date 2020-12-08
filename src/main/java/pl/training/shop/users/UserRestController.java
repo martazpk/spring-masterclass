@@ -16,7 +16,7 @@ import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.methodOn;
 
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("api/users")
+@RequestMapping("${apiPrefix}/users")
 public class UserRestController {
 
     private final UserService userService;
