@@ -47,7 +47,6 @@ class FakePaymentServiceSpringTest {
 
     @BeforeEach
     void setUp() {
-        FakePaymentService paymentService = new FakePaymentService(paymentIdGenerator, repository, publisher);
         when(paymentIdGenerator.getNext()).thenReturn(ID);
         when(repository.save(any(Payment.class))).thenReturn(payment);
         payment = paymentService.process(REQUEST);
